@@ -1,0 +1,60 @@
+classDiagram
+    User --> Tap
+    User --> RelationUserChild
+    Tap --> Status
+    RelationUserChild --> Child
+    Tap --> Child
+    RelationUserChild --> Rol
+    Child <-- Treatment
+
+    class User {
+        -int id
+        -String username 
+        -String password
+        -String email
+        -int id_rol
+        +consultarInfant():void
+        +iniciarSessio():boolean
+    }
+
+    class Tap {
+        -int id
+        -int child_id
+        -int status_id
+        -int user_id
+        -datetime init
+        -datetime end
+    }
+
+    class Status {
+        -int id
+        -String name
+    }
+
+    class RelationUserChild {
+        -int user_id
+        -int child_id
+        -int rol-id
+    }
+
+    class Rol {
+        -int id
+        -String type_rol
+    }
+
+    class Child {
+        -int id
+        -String child_name
+        -int sleep_average
+        -int treatment_id
+        -int time
+
+        +consultarTractament: obj(Treatment)
+        +consultarTap: array(Tap)
+        +estatActual(Tap:array): Tap
+    }
+
+    class Treatment {
+        -int id
+        -String name
+    }
