@@ -1,9 +1,9 @@
 flowchart TD
     A[Cliente - Vista de login] -->|Envia username| B[Cliente - DAO]
-    B -->|Petición HTTP (GET)| C[Servidor - Webservice]
+    B -->|Petición HTTP \(GET\)| C[Servidor - Webservice]
     C -->|Valida dades de l'usuari| D[Servidor - DAO Usuaris]
     D -->|Consulta dades de l'infant| E[Base de dades]
     E -->|Retorna dades de l'infant| D
     D -->|Retorna informació| C
-    C -->|Resposta HTTP (200 OK)| B
+    C -->|Resposta HTTP \(200 OK\)| B
     B -->|Dades de l'infant processades| F[Cliente - Vista de l'infant]
