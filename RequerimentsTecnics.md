@@ -61,4 +61,4 @@
 - **Metodologia**: Scrum
 
 ### Proves de qualitat (QA)
-- **Pendent**
+- **Tests**
