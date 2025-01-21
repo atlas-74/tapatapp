@@ -1,7 +1,5 @@
 from flask import Flask, request, jsonify
 
-
-
 class User:
     def __init__(self, id, username, password, email=""):
         self.id=id
@@ -37,18 +35,23 @@ if(u):
 else:
     print("No trobat")
 
+#definir End-Point (http://<ip>:port/proto1/user?username=...)
+# http://localhost:5000/TapatApp?user=username1
+# Method (GET/POST) -> GET  
+
 app = Flask(__name__)
 
-@app.route('/proto1/getdata/<string:param1>', methods=['GET'])
-def getData(param1):
-    return "Aquest és el servei /proto1/getdata/ amb parametre=" + param1
-
-@app.route('/hello', methods=['GET'])
-def hello():
-    prova=request.args.get('prova')
-    if(prova):
-        return "Hello World Param=" + prova
-    return "Hello World"
+@app.route('/TapatApp', methods=['GET'])
+def get_username():
+    username = request.args.get('username')
+    user = daoUser.getUserByUsername(username)
+    if user:
+        return jsonify({"Username": user.username}), 200
+    else:
+        return jsonify({"error": "No trobat"}), 400
 
 if __name__ == '__main__':
-     app.run(debug=True,host="0.0.0.0",port="10050")
+    app.run(debug=True)
+
+# Parametres -> username
+# Resposta (HTTP Codes 200 OK - 400 No trobat)
