@@ -36,7 +36,7 @@ else:
     print("No trobat")
 
 #definir End-Point (http://<ip>:port/proto1/user?username=...)
-# http://localhost:5000/TapatApp?user=username1
+# http://localhost:5000/TapatApp?username=user1
 # Method (GET/POST) -> GET  
 
 app = Flask(__name__)
