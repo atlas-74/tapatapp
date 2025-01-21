@@ -36,22 +36,18 @@ else:
     print("No trobat")
 
 #definir End-Point (http://<ip>:port/proto1/user?username=...)
-# http://localhost:5000/TapatApp?username=user1
+# http://localhost:5000/tapatapp/getuser
 # Method (GET/POST) -> GET  
 
 app = Flask(__name__)
 
-@app.route('/TapatApp', methods=['GET'])
-def get_username():
-    username = request.args.get('username')
-    user = daoUser.getUserByUsername(username)
-    if user:
-        return jsonify({"Username": user.username}), 200
-    else:
-        return jsonify({"error": "No trobat"}), 400
+@app.route('tapatapp/getUser', methods=['GET'])
+def get_User():
+    return "Hello World"
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port="10050")
 
 # Parametres -> username
 # Resposta (HTTP Codes 200 OK - 400 No trobat)
