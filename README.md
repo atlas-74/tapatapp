@@ -7,5 +7,5 @@
 [HTTP Request](HttpRequestResponse.md)
 
 ## DIAGRAMES
-[Diagrama de Classes (Mermaid)](/charts/DiagramaClassesTapata.mermaid)\
+[Diagrama de Classes (Mermaid)](/charts/DiagramaClassesTapat.mermaid)\
 [Diagrama de Fluxe (Mermaid)](charts/DiagramaFluxeSoftware.mermaid)
