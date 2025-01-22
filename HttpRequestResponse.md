@@ -1,37 +1,4 @@
-#      Http Request Response     .                       
-
-
-[**1 Http Request	1**](#1-http-request)
-
-[Components d'una HTTP request	1](#components-d'una-http-request)
-
-[1.1 Exemples de HTTP request	2](#1.1-exemples-de-http-request)
-
-[Com funciona un HTTP request en un entorn real?	2](#com-funciona-un-http-request-en-un-entorn-real?)
-
-[1.2 clients HTTP	2](#1.2-clients-http)
-
-[1.3 Mime Types	3](#1.3-mime-types)
-
-[**2 Http Response	5**](#2-http-response)
-
-[2.1 Línia d'estat (Status Line)	5](#2.1-línia-d'estat-\(status-line\))
-
-[2.2 Headers	5](#2.2-headers)
-
-[2.3 Body (cos de la resposta)	6](#2.3-body-\(cos-de-la-resposta\))
-
-[2.4 Codis d’estat de Response Http	6](#2.4-codis-d’estat-de-response-http)
-
-[1\. Codi d'estat 1xx \- Informatius	6](#1.-codi-d'estat-1xx---informatius)
-
-[2\. Codi d'estat 2xx \- OK	7](#2.-codi-d'estat-2xx---ok)
-
-[3\. Codi d'estat 3xx \- Redirecció	7](#3.-codi-d'estat-3xx---redirecció)
-
-[4\. Codi d'estat 4xx \- Errors del client	7](#4.-codi-d'estat-4xx---errors-del-client)
-
-[5\. Codi d'estat 5xx \- Errors del servidor	8](#5.-codi-d'estat-5xx---errors-del-servidor)
+#      Http Request Response                        
 
 # 1 Http Request {#1-http-request}
 
