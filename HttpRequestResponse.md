@@ -82,19 +82,19 @@ Instal·lar curl:  [https://scoop.sh/\#/apps?q=curl](https://scoop.sh/#/apps?q=c
 
 Executar una petició GET:
 
-PS C:\\Users\\amallad2\> C:\\Users\\amallad2\\scoop\\apps\\curl\\current\\bin\\curl https://proven.cat
+PS C:\\Users\\mmi4641\> C:\\Users\\mmi4641\\scoop\\apps\\curl\\current\\bin\\curl https://proven.cat
 
-PS\> C:\\Users\\amallad2\\scoop\\apps\\curl\\current\\bin\\curl  https://api.chucknorris.io/jokes/categories
+PS\> C:\\Users\\mmi4641\\scoop\\apps\\curl\\current\\bin\\curl  https://api.chucknorris.io/jokes/categories
 
-PS\> C:\\Users\\amallad2\\scoop\\apps\\curl\\current\\bin\\curl  h[ttps://api.chucknorris.io/jokes/random?category=](https://api.chucknorris.io/jokes/random?category={category})dev
+PS\> C:\\Users\\mmi4641\\scoop\\apps\\curl\\current\\bin\\curl  h[ttps://api.chucknorris.io/jokes/random?category=](https://api.chucknorris.io/jokes/random?category={category})dev
 
 Desar la resposta en un fitxer:
 
-PS C:\\Users\\amallad2\> C:\\Users\\amallad2\\scoop\\apps\\curl\\current\\bin\\curl \-o fitxer.html h[ttps://api.chucknorris.io/jokes/random?category=](https://api.chucknorris.io/jokes/random?category={category})dev
+PS C:\\Users\\mmi4641\> C:\\Users\\mmi4641\\scoop\\apps\\curl\\current\\bin\\curl \-o fitxer.html h[ttps://api.chucknorris.io/jokes/random?category=](https://api.chucknorris.io/jokes/random?category={category})dev
 
 Executar petició POST:  [https://www.postman.com/postman/published-postman-templates/documentation/ae2ja6x/postman-echo?ctx=documentation](https://www.postman.com/postman/published-postman-templates/documentation/ae2ja6x/postman-echo?ctx=documentation)
 
-PS\> C:\\Users\\amallad2\\scoop\\apps\\curl\\current\\bin\\curl \-X POST \-H "Content-Type: application/json"  \-d "{'test': 'value'}" https://postman-echo.com/post
+PS\> C:\\Users\\mmi4641\\scoop\\apps\\curl\\current\\bin\\curl \-X POST \-H "Content-Type: application/json"  \-d "{'test': 'value'}" https://postman-echo.com/post
 
 ## 1.3 Mime Types {#1.3-mime-types}
 
