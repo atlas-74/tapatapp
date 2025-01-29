@@ -43,8 +43,8 @@ app = Flask(__name__)
 
 @app.route('/tapatapp/getuser', methods=['GET'])
 def get_User():
-    n=request.args.get('name')
-    email = str(request.args.get('email'))
+    n = request.args.get('name', 'notfound')
+    email = request.args.get('email', 'notfound')
     return "Hello World: Nom:" + n + ": email:" + email
 
 @app.route('/prototip/getuser/<string:username>', methods=['GET'])
