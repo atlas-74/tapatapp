@@ -36,7 +36,7 @@
 - **Tipus de petició: application/json.**
 - **Paràmetres: username(string).**
 - **Resposta**:
-  - **Codi d'estat**: `400`
+  - **Codi d'estat**: `404`
   - **Cos de la resposta**: 
     ```plaintext
     "No s'ha trobat l'usuari"
@@ -52,7 +52,7 @@
 - **Tipus de petició: application/json.**
 - **Paràmetres: username(string).**
 - **Resposta**:
-  - **Codi d'estat**: `404`
+  - **Codi d'estat**: `400`
   - **Cos de la resposta**: 
     ```plaintext
     "Error. Cerca o tipus de dada incorrecta"
