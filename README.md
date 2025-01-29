@@ -17,8 +17,8 @@
 - **HOST**: `localhost:5000`
 - **End-point (URL)**: `/tapatapp/getuser`
 - **Method**: `GET`
-- **Tipus de petició: application/json.
-- **Paràmetres: username(string).
+- **Tipus de petició: application/json.**
+- **Paràmetres: username(string).**
 - **Resposta**:
   - **Codi d'estat**: `200 OK`
   - **Cos de la resposta**: 
@@ -33,8 +33,8 @@
 - **HOST**: `localhost:5000`
 - **End-point (URL)**: `/tapatapp/getuser`
 - **Method**: `GET`
-- **Tipus de petició: application/json.
-- **Paràmetres: username(string).
+- **Tipus de petició: application/json.**
+- **Paràmetres: username(string).**
 - **Resposta**:
   - **Codi d'estat**: `404`
   - **Cos de la resposta**: 
@@ -49,8 +49,8 @@
 - **HOST**: `localhost:5000`
 - **End-point (URL)**: `/tapatapp/getuser`
 - **Method**: `GET`
-- **Tipus de petició: application/json.
-- **Paràmetres: username(string).
+- **Tipus de petició: application/json.**
+- **Paràmetres: username(string).**
 - **Resposta**:
   - **Codi d'estat**: `400`
   - **Cos de la resposta**: 
