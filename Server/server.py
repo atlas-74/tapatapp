@@ -43,9 +43,15 @@ app = Flask(__name__)
 
 @app.route('/tapatapp/getuser', methods=['GET'])
 def get_User():
-    n = request.args.get('name', 'notfound')
-    email = request.args.get('email', 'notfound')
-    return "Hello World: Nom:" + n + ": email:" + email
+    username = request.args.get('username')
+    if not username:
+        return jsonify({"error": "Invalid parameters"}), 400
+
+    user = daoUser.getUserByUsername(username)
+    if user:
+        return jsonify({"id": user.id, "username": user.username, "email": user.email}), 200
+    else:
+        return jsonify({"error": "User not found"}), 404
 
 @app.route('/prototip/getuser/<string:username>', methods=['GET'])
 def prototipGetUser(username):
