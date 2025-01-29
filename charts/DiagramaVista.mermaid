@@ -1,0 +1,30 @@
+classDiagram
+    Vista --> DAOUser
+    DAOUser --> User
+    User --|> Vista
+
+    class Vista {
+    +InterpretJSONToHTML
+    +ShowId
+    +ShowUsername
+    +ShowEmail
+    +ShowPassword
+    }
+
+    class DAOUser {
+    +getUserByUsername
+    +getUserById
+    +getUserByEmail
+    +makeJSONObject
+    }
+
+    class User {
+    -int id
+    -String username
+    -String password
+    -String email
+    -int id_rol
+    +consultarInfant():void
+    +iniciarSessio():boolean
+    }
+
