@@ -61,4 +61,4 @@
 # Imatges
 
 ## Wireframe
-![Imatge Wireframe](/img/wireframeCaptura.png)
+![Imatge Wireframe](/img/wireframeCaptura.PNG)
