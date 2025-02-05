@@ -1,21 +1,30 @@
-flowchart TD
-    A[1 - Login] -->|E-mail & Usuari & Contrasenya| B{2 - Login OK?}
-    B -- Sí --> C[3 - Lobby]
-    B -- No --> D[4 - Error de Login]
-    A --> E[5 - Registre]
-    E --> F{6 - Registre OK?}
-    F -- Sí --> C
-    F -- No --> G[7 - Error de Registre]
-    C --> H[9 - Perfil Nen]
-    C --> I[10 - Perfil Tutor]
-    C --> J[11 - Tratamients]
-    C --> K[12 - Tiempo de Parche]
-    C --> L[13 - Configuración]
-    C --> M[14 - Tancar Sessió]
-    A --> N[15 - Olvidado Contraseña]
-    
-    J --> O[16 - Receta Médica]
-    J --> P[17 - Perfil Doctors]
-    J --> Q[18 - Procedimients]
+flowchart LR
+    subgraph login
+        A[1 - Login] -->|E-mail & Usuari & Contrasenya| B{2 - Login OK?}
+        B -- No --> D[4 - Error de Login]
+        B -- Sí --> C[3 - Lobby]
+        A --> |Usuari & E-mail & Contrasenya & Telefon & Direcció| E[5 - Registre]
+        E --> F{6 - Registre OK?}
+        F -- Sí --> C
+        F -- No --> G[7 - Error de Registre]
+        A --> |E-mail| N[15 - Olvidado Contraseña]
+    end
 
-    K --> R[19 - Temps Restante Parche]
+    subgraph Lobby
+        C --> H[9 - Perfil Nen]
+        C --> I[10 - Perfil Tutor]
+        C --> J[11 - Tratamients]
+        C --> K[12 - Tiempo de Parche]
+        C --> L[13 - Configuración]
+        C --> M[14 - Tancar Sessió]
+    end
+
+    subgraph Tratamientos
+        J --> O[16 - Receta Médica]
+        J --> P[17 - Perfil Doctors]
+        J --> Q[18 - Procedimients]
+    end
+
+    subgraph Parche
+        K --> R[19 - Temps Restante Parche]
+    end
