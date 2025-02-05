@@ -1,11 +1,21 @@
 flowchart TD
     A[1 - Login] --> B{2 - Login OK?}
-    B -- Sí --> C[3 - Pantalla Principal]
+    B -- Sí --> C[3 - Lobby]
     B -- No --> D[4 - Error de Login]
     A --> E[5 - Registre]
     E --> F{6 - Registre OK?}
     F -- Sí --> C
     F -- No --> G[7 - Error de Registre]
-    C --> H[8 - Perfil d'Usuari]
-    C --> I[9 - Configuració]
-    C --> J[10 - Tancar Sessió]
+    C --> H[9 - Perfil Nen]
+    C --> I[10 - Perfil Tutor]
+    C --> J[11 - Tratamients]
+    C --> K[12 - Tiempo de Parche]
+    C --> L[13 - Configuración]
+    C --> M[14 - Tancar Sessió]
+    A --> N[15 - Olvidado Contraseña]
+    
+    J --> O[16 - Receta Médica]
+    J --> P[17 - Perfil Doctors]
+    J --> Q[18 - Procedimients]
+
+    K --> R[19 - Temps Restante Parche]
