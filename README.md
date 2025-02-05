@@ -57,3 +57,7 @@
     ```plaintext
     "Error. Cerca o tipus de dada incorrecta"
     ```
+#Imatges
+
+## Wireframe
+[Requeriments Tecnics del Projecte TapatApp](/img/DflowchartWireframe.png)\
