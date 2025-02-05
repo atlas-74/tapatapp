@@ -61,4 +61,4 @@
 # Imatges
 
 ## Wireframe
-[Imatge Wireframe](/img/flowchartWireframe.png)
+![Imatge Wireframe](/img/flowchartWireframe.png)
