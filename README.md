@@ -65,7 +65,7 @@
 
 ---
 
-# Descripcions
+# Descripcions de Vista
 **Vista de Login:**
 
 - **Descripció:** Pantalla de Login on l'usuari es validarà.
