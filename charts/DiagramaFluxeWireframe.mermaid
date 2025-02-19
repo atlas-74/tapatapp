@@ -1,0 +1,19 @@
+flowchart LR
+    subgraph login
+        A[Login] --> B{Login OK?}
+        B --> D[Error Login]
+        B --> C[Lobby]
+        A --> N[Olvidar Contraseña]
+    end
+
+    subgraph Lobby
+        C --> H[Perfil]
+        C --> J[Tratamientos]
+        C --> L[Configuración]
+        C --> M[Cerrar Sesión]
+    end
+
+    subgraph Tratamientos
+        J --> O[Receta Médica]
+        J --> P[Perfil Médicos]
+    end
