@@ -18,8 +18,9 @@ users = [
 # Crear les classes Child, Tap, Role, Status i Treatment
 
 class Child:
-    def __init__(self, id, child_id, username):
+    def __init__(self, id, child_name, child_id, username):
         self.id=id
+        self.child_name=child_name
         self.child_id=child_id
         self.username=username
 
