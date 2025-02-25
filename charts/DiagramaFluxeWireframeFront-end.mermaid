@@ -1,0 +1,16 @@
+flowchart LR
+    subgraph login
+        A[Login] --> B{Login OK?}
+        B --> C[Lobby]
+    end
+
+    subgraph Lobby
+        C --> H[Perfil]
+        C --> J[Infant]
+        C --> M[Cerrar Sesión]
+    end
+
+    subgraph Infant
+        J --> O[Progrés Tap]
+        J --> P[Estat Tap]
+    end
