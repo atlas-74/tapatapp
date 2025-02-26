@@ -1,35 +1,35 @@
 flowchart LR
     A[Login] --> B{Login OK?}
     B -- No --> D[Error de Login]
-    B -- Sí --> C[Lobby]
+    B -- Si --> C[Lobby]
 
     C --> H[Perfil]
     C --> J[Infant]
-    C --> M[Cerrar Sesión]
+    C --> M[Cerrar Sesion]
 
-    J --> O[Progrés Tap]
+    J --> O[Progres Tap]
     J --> P[Estat Tap]
 
-    %% Flujos lógicos con las clases
-    B -.->|Llamada a login()| DAOUser.getUserByUsername(username)
-    J -.->|Llamada a getChildById(child_id)| DAOChild.getChildrenByUser(user_id)
-    O -.->|Llamada a getProgress()| Child.getProgress()
-    P -.->|Llamada a getStatus()| Status.getStatus()
+    %% Flujos logicos con las clases
+    B -.-> Llamada a login DAOUser.getUserByUsername username
+    J -.-> Llamada a getChildById child_id DAOChild.getChildrenByUser user_id
+    O -.-> Llamada a getProgress Child.getProgress
+    P -.-> Llamada a getStatus Status.getStatus
 
     %% Si el login es correcto, se recupera el niño y sus "taps"
-    C -.->|Llamada a getChildrenByUser(user_id)| DAOChild.getChildrenByUser(user_id)
-    H -.->|Muestra detalles de perfil de usuario| User.username, User.email
+    C -.-> Llamada a getChildrenByUser user_id DAOChild.getChildrenByUser user_id
+    H -.-> Muestra detalles de perfil de usuario User.username User.email
 
-    %% Al cerrar sesión, se llama a logout()
-    M -.->|Llamada a logout()| User.logout()
+    %% Al cerrar sesion, se llama a logout
+    M -.-> Llamada a logout User.logout
 
     %% Registros o errores si el login es incorrecto
-    A -.->|Llamada a DAOUser.getUserByUsername(username)| DAOUser.getUserByUsername(username)
-    A -->|E-mail| N[Olvidado Contraseña]
-    N -.->|Llamada a recuperar contraseña| DAOUser.getUserByUsername(username)
+    A -.-> Llamada a DAOUser.getUserByUsername username DAOUser.getUserByUsername username
+    A --> Email N[Olvidado Contraseña]
+    N -.-> Llamada a recuperar contraseña DAOUser.getUserByUsername username
 
     %% Registro de nuevo usuario
-    A --> |Registrar usuario| E[Registro]
-    E -.->|Llamada a DAOUser.getUserByUsername(username)| DAOUser.getUserByUsername(username)
-    F -- Sí --> C
+    A --> Registrar usuario E[Registro]
+    E -.-> Llamada a DAOUser.getUserByUsername username DAOUser.getUserByUsername username
+    F -- Si --> C
     F -- No --> G[Error de Registro]
