@@ -1,0 +1,13 @@
+flowchart LR
+    A[View] --> B[DAOUser]
+    A --> C[DAOChild]
+    A --> D[DAOTap]
+    B --> E[WebService]
+    C --> E
+    D --> E
+    E --> F[DAOUser]
+    E --> G[DAOChild]
+    E --> H[DAOTap]
+    F --> I[BBDD/List]
+    G --> I
+    H --> I
