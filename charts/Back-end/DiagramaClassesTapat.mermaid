@@ -1,28 +1,17 @@
 classDiagram
     class WebService {
-        + getUserByCredentials(String username, String password)
-        + getChildByUserId(int user_id)
-        + getTapByChildId(int child_id)
-    }
-
-    class DAOUser {
-        + ArrayList<User> users
-        + getUserById(int user_id)
+        + authenticateUser(String username, String password)
+        + getUserData(int user_id)
+        + getChildrenByUser(int user_id)
+        + getTapsByChild(int child_id)
     }
 
     class User {
         + int user_id
         + String username
-        + String password
         + String email
         + int rol_id
-    }
-
-    class DAOChild {
-        + ArrayList<Child> children
-        + ArrayList<Tap> taps
-        + getChildByUserId(int user_id)
-        + getTapByChildId(int child_id)
+        + isAuthenticated()
     }
 
     class Child {
@@ -31,15 +20,16 @@ classDiagram
         + int sleep_average
         + int treatment_id
         + int time
+        + getSleepReport()
     }
 
     class Tap {
         + int tap_id
         + int child_id
         + int status_id
-        + int user_id
         + Date init
         + Date end
+        + getTapDuration()
     }
 
     class Rol {
@@ -57,18 +47,9 @@ classDiagram
         + String name
     }
 
-    WebService --> DAOUser : requests User by\nusername AND password
-    DAOUser --> WebService : returns User
-    WebService --> DAOChild : requests Child by user_id
-    DAOChild --> WebService : returns Child
-    WebService --> DAOChild : requests Tap by child_id
-    DAOChild --> WebService : returns Tap
-    DAOUser --> User : requests User data
-    User --> DAOUser : returns User data
-    DAOChild --> Child : requests Child data
-    Child --> DAOChild : returns Child data
-    DAOChild --> Tap : requests Tap data
-    Tap --> DAOChild : returns Tap data
+    WebService --> User : retrieves
+    WebService --> Child : retrieves
+    WebService --> Tap : retrieves
 
     User --> Rol : has a
     Tap --> Status : has a
