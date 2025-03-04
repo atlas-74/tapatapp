@@ -6,13 +6,27 @@ classDiagram
         + showTapData(Tap tap)
     }
 
+    class DAOUser {
+        + getUserById(int user_id)
+        + getUserByUsername(String username)
+    }
+
+    class DAOChild {
+        + getChildById(int child_id)
+        + getChildrenByUser(int user_id)
+    }
+
+    class DAOTap {
+        + getTapByChild(int child_id)
+        + getTapsByStatus(int status_id)
+    }
+
     class User {
         + int user_id
         + String username
         + String email
         + int rol_id
-        + login()
-        + logout()
+        + isAuthenticated()
     }
 
     class Child {
@@ -21,7 +35,7 @@ classDiagram
         + int sleep_average
         + int treatment_id
         + int time
-        + getProgress()
+        + getSleepReport()
     }
 
     class Tap {
@@ -30,7 +44,7 @@ classDiagram
         + int status_id
         + Date init
         + Date end
-        + updateTapStatus(status_id)
+        + getTapDuration()
     }
 
     class Rol {
@@ -48,9 +62,13 @@ classDiagram
         + String name
     }
 
-    Vista --> User : displays
-    Vista --> Child : displays
-    Vista --> Tap : displays
+    Vista --> DAOUser : accesses
+    Vista --> DAOChild : accesses
+    Vista --> DAOTap : accesses
+
+    DAOUser --> User : retrieves
+    DAOChild --> Child : retrieves
+    DAOTap --> Tap : retrieves
 
     User --> Rol : has a
     Tap --> Status : has a
