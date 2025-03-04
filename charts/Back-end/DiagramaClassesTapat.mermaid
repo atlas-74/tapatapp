@@ -1,60 +1,71 @@
 classDiagram
-    User --> Tap
-    User --> RelationUserChild
-    Tap --> Status
-    RelationUserChild --> Child
-    Tap --> Child
-    RelationUserChild --> Rol
-    Child <-- Treatment
+    class WebService {
+        + getUserByCredentials(String username, String password)
+        + getChildByUserId(int user_id)
+        + getTapByChildId(int child_id)
+    }
+
+    class DAOUser {
+        + ArrayList<User> users
+        + getUserById(int user_id)
+    }
 
     class User {
-        -int id
-        -String username 
-        -String password
-        -String email
-        -int id_rol
-        +consultarInfant():void
-        +iniciarSessio():boolean
+        + int user_id
+        + String username
+        + String password
+        + String email
+        + int rol_id
     }
 
-    class Tap {
-        -int id
-        -int child_id
-        -int status_id
-        -int user_id
-        -datetime init
-        -datetime end
-    }
-
-    class Status {
-        -int id
-        -String name
-    }
-
-    class RelationUserChild {
-        -int user_id
-        -int child_id
-        -int rol-id
-    }
-
-    class Rol {
-        -int id
-        -String type_rol
+    class DAOChild {
+        + ArrayList<Child> children
+        + ArrayList<Tap> taps
+        + getChildByUserId(int user_id)
+        + getTapByChildId(int child_id)
     }
 
     class Child {
-        -int id
-        -String child_name
-        -int sleep_average
-        -int treatment_id
-        -int time
+        + int child_id
+        + String child_name
+        + int sleep_average
+        + String treatment
+        + int time
+    }
 
-        +consultarTractament: obj(Treatment)
-        +consultarTap: array(Tap)
-        +estatActual(Tap:array): Tap
+    class Tap {
+        + int tap_id
+        + int child_id
+        + String status
+        + int user_id
+        + Date init
+        + Date end
+    }
+
+    class Rol {
+        + int rol_id
+        + String type_rol
+    }
+
+    class Status {
+        + int status_id
+        + String name
     }
 
     class Treatment {
-        -int id
-        -String name
+        + int treatment_id
+        + String name
     }
+
+    WebService --> DAOUser : requests User by\nusername AND password
+    DAOUser --> WebService : returns User
+    WebService --> DAOChild : requests Child by user_id
+    DAOChild --> WebService : returns Child
+    WebService --> DAOChild : requests Tap by child_id
+    DAOChild --> WebService : returns Tap
+    DAOUser --> User : requests User data
+    User --> DAOUser : returns User data
+    DAOChild --> Child : requests Child data
+    Child --> DAOChild : returns Child data
+    DAOChild --> Tap : requests Tap data
+    Tap --> DAOChild : returns Tap data
