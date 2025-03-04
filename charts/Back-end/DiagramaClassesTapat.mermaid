@@ -6,6 +6,21 @@ classDiagram
         + getTapsByChild(int child_id)
     }
 
+    class DAOUser {
+        + getUserById(int user_id)
+        + getUserByUsername(String username)
+    }
+
+    class DAOChild {
+        + getChildById(int child_id)
+        + getChildrenByUser(int user_id)
+    }
+
+    class DAOTap {
+        + getTapByChild(int child_id)
+        + getTapsByStatus(int status_id)
+    }
+
     class User {
         + int user_id
         + String username
@@ -47,9 +62,13 @@ classDiagram
         + String name
     }
 
-    WebService --> User : retrieves
-    WebService --> Child : retrieves
-    WebService --> Tap : retrieves
+    WebService --> DAOUser : accesses
+    WebService --> DAOChild : accesses
+    WebService --> DAOTap : accesses
+
+    DAOUser --> User : retrieves
+    DAOChild --> Child : retrieves
+    DAOTap --> Tap : retrieves
 
     User --> Rol : has a
     Tap --> Status : has a
