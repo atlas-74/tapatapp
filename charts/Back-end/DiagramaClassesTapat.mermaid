@@ -29,14 +29,14 @@ classDiagram
         + int child_id
         + String child_name
         + int sleep_average
-        + String treatment
+        + int treatment_id
         + int time
     }
 
     class Tap {
         + int tap_id
         + int child_id
-        + String status
+        + int status_id
         + int user_id
         + Date init
         + Date end
@@ -69,3 +69,7 @@ classDiagram
     Child --> DAOChild : returns Child data
     DAOChild --> Tap : requests Tap data
     Tap --> DAOChild : returns Tap data
+
+    User --> Rol : has a
+    Tap --> Status : has a
+    Child --> Treatment : has a
