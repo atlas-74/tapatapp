@@ -1,59 +1,57 @@
 classDiagram
+    class Vista {
+        + showUserLogin()
+        + showUserData(User user)
+        + showChildData(Child child)
+        + showTapData(Tap tap)
+    }
+
     class User {
-        +int id
-        +string username
-        +string email
-        +string password
-        +login()
-        +logout()
+        + int user_id
+        + String username
+        + String email
+        + int rol_id
+        + login()
+        + logout()
     }
 
     class Child {
-        +int id
-        +string username
-        +int sleep_average
-        +getProgress()
+        + int child_id
+        + String child_name
+        + int sleep_average
+        + int treatment_id
+        + int time
+        + getProgress()
     }
 
     class Tap {
-        +int id
-        +int child_id
-        +int status_id
-        +string init_time
-        +string end_time
-        +updateTapStatus(status_id)
+        + int tap_id
+        + int child_id
+        + int status_id
+        + Date init
+        + Date end
+        + updateTapStatus(status_id)
+    }
+
+    class Rol {
+        + int rol_id
+        + String type_rol
     }
 
     class Status {
-        +int id
-        +string name
-        +getStatus()
+        + int status_id
+        + String name
     }
 
-    class DAOUser {
-        +getUserByUsername(username)
+    class Treatment {
+        + int treatment_id
+        + String name
     }
 
-    class DAOChild {
-        +getChildById(child_id)
-        +getChildrenByUser(user_id)
-    }
+    Vista --> User : displays
+    Vista --> Child : displays
+    Vista --> Tap : displays
 
-    class DAOTap {
-        +getTapByChild(child_id)
-        +getTapsByStatus(status_id)
-    }
-
-    class Role {
-        +int id
-        +string role_type
-    }
-
-    User --> "1" Role : "has"
-    User --> "1..*" Child : "manages"
-    Child --> "1..*" Tap : "has"
-    Tap --> "1" Status : "has"
-    Role --> "1..*" User : "assigned to"
-    DAOUser --> User : "accesses"
-    DAOChild --> Child : "accesses"
-    DAOTap --> Tap : "accesses"
+    User --> Rol : has a
+    Tap --> Status : has a
+    Child --> Treatment : has a
