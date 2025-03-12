@@ -91,19 +91,19 @@ def login():
         return jsonify(user), 200
     return jsonify({"error": "Invalid username or password"}), 401
 
-@app.route('/prototip2/children/<int:user_id>', methods=['GET'])
+@app.route('/prototip2/GetChildByUser/<int:user_id>', methods=['GET'])
 def get_children_by_user_id(user_id):
     children = child_dao.get_children_by_user_id(user_id)
     return jsonify(children), 200
 
-@app.route('/prototip2/child/<int:child_id>', methods=['GET'])
+@app.route('/prototip2/GetChildByChildId/<int:child_id>', methods=['GET'])
 def get_child_by_id(child_id):
     child = child_dao.getChildById(child_id)
     if child:
         return jsonify(child), 200
     return jsonify({"error": "Child not found"}), 404
 
-@app.route('/prototip2/taps/<int:child_id>', methods=['GET'])
+@app.route('/prototip2/GetTapByChildId/<int:child_id>', methods=['GET'])
 def get_taps_by_child(child_id):
     taps = tap_dao.getTapByChild(child_id)
     return jsonify(taps), 200

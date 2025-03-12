@@ -53,7 +53,7 @@ class DAOUser:
 class DAOChild:
     def get_children_by_user_id(self, user_id):
         try:
-            response = requests.get(f"http://localhost:5000/prototip2/children/{user_id}")
+            response = requests.get(f"http://localhost:5000/prototip2/GetChildByUser/{user_id}")
             if response.status_code == 200:
                 children_data = response.json()
                 return [Child(id=child['id'], name=child['child_name']) for child in children_data]
@@ -65,7 +65,7 @@ class DAOChild:
 class DAOTap:
     def get_taps_by_child_id(self, child_id):
         try:
-            response = requests.get(f"http://localhost:5000/prototip2/taps/{child_id}")
+            response = requests.get(f"http://localhost:5000/prototip2/GetTapByChildId/{child_id}")
             if response.status_code == 200:
                 taps_data = response.json()
                 return [Tap(id=tap['id'], child_id=tap['child_id'], status_id=tap['status_id'], user_id=tap['user_id'], init=tap['init'], end=tap['end']) for tap in taps_data]
