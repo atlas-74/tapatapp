@@ -43,7 +43,7 @@ class Tap:
         self.end = end
     
     def __str__(self):
-        return "Child Id:" + str(self.child_id) + " Status Id:" + str(self.status_id)
+        return f"Id: {self.id}, Child Id: {self.child_id}, Status Id: {self.status_id}, Init: {self.init}, End: {self.end}"
 
 taps = [
     Tap(id=1, child_id=1, status_id=1, user_id=1, init="2024-12-18T19:42:43", end="2024-12-18T20:42:43"),

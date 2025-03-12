@@ -11,22 +11,24 @@ class User:
         return f"Id: {self.id}, Username: {self.username}, Email: {self.email}"
 
 class Child:
-    def __init__(self, id, child_name, age):
+    def __init__(self, id, name):
         self.id = id
-        self.child_name = child_name
-        self.age = age
+        self.name = name
 
     def __str__(self):
-        return f"Id: {self.id}, Name: {self.child_name}, Age: {self.age}"
+        return f"Id: {self.id}, Name: {self.name}"
 
 class Tap:
-    def __init__(self, id, child_id, timestamp):
+    def __init__(self, id, child_id, status_id, user_id, init, end):
         self.id = id
         self.child_id = child_id
-        self.timestamp = timestamp
+        self.status_id = status_id
+        self.user_id = user_id
+        self.init = init
+        self.end = end
 
     def __str__(self):
-        return f"Id: {self.id}, Child Id: {self.child_id}, Timestamp: {self.timestamp}"
+        return f"Id: {self.id}, Child Id: {self.child_id}, Status Id: {self.status_id}, Init: {self.init}, End: {self.end}"
 
 class Error:
     def __init__(self, code, description):
@@ -54,7 +56,7 @@ class DAOChild:
             response = requests.get(f"http://localhost:5000/prototip2/children/{user_id}")
             if response.status_code == 200:
                 children_data = response.json()
-                return [Child(id=child['id'], child_name=child['child_name'], age=child['age']) for child in children_data]
+                return [Child(id=child['id'], name=child['child_name']) for child in children_data]
             else:
                 return Error(code=response.status_code, description="Error fetching children")
         except requests.exceptions.RequestException as e:
@@ -66,7 +68,7 @@ class DAOTap:
             response = requests.get(f"http://localhost:5000/prototip2/taps/{child_id}")
             if response.status_code == 200:
                 taps_data = response.json()
-                return [Tap(id=tap['id'], child_id=tap['child_id'], timestamp=tap['timestamp']) for tap in taps_data]
+                return [Tap(id=tap['id'], child_id=tap['child_id'], status_id=tap['status_id'], user_id=tap['user_id'], init=tap['init'], end=tap['end']) for tap in taps_data]
             else:
                 return Error(code=response.status_code, description="Error fetching taps")
         except requests.exceptions.RequestException as e:
