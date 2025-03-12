@@ -12,7 +12,8 @@ class User:
 
 users = [
     User(id=1, username="mare", password="12345", email="prova@gmail.com"),
-    User(id=2, username="pare", password="123", email="prova2@gmail.com")
+    User(id=2, username="pare", password="123", email="prova2@gmail.com"),
+    User(id=3, username="Hector", password="123", email="hhospital@gmail.com")
 ]
 
 # Crear les classes Child, Tap, Role, Status i Treatment
@@ -30,7 +31,8 @@ class Child:
 
 children = [
     Child(id=1, child_name="Carol Child", sleep_average=8, treatment_id=1, time=6),
-    Child(id=2, child_name="Jaco Child", sleep_average=10, treatment_id=2, time=6)
+    Child(id=2, child_name="Jaco Child", sleep_average=10, treatment_id=2, time=6),
+    Child(id=3, child_name="Hector Child", sleep_average=12, treatment_id=1, time=6)
 ]
 
 class Tap:
@@ -54,7 +56,9 @@ relation_user_child = [
     {"user_id": 1, "child_id": 1, "rol_id": 1},
     {"user_id": 1, "child_id": 1, "rol_id": 2},
     {"user_id": 2, "child_id": 2, "rol_id": 1},
-    {"user_id": 2, "child_id": 2, "rol_id": 2}
+    {"user_id": 2, "child_id": 2, "rol_id": 2},
+    {"user_id": 3, "child_id": 3, "rol_id": 1},
+    {"user_id": 3, "child_id": 3, "rol_id": 2}
 ]
 
 class Role:
