@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 
 class User:
     def __init__(self, id, username, email, password):
@@ -55,6 +56,13 @@ class DAOChild:
         except requests.exceptions.RequestException as e:
             return None, Error(code=503, description=f"Error connecting to the server: {e}")
 
+def logout():
+    try:
+        os.remove('Prototip3/token.txt')
+        print("Token removed successfully.")
+    except FileNotFoundError:
+        print("Token file not found.")
+
 def main():
     dao_user = DAOUser()
     dao_child = DAOChild()
@@ -70,6 +78,9 @@ def main():
         children, error = dao_child.get_children_by_user_id(user_id, token)
         if children:
             print("Children:", children)
+            logout_prompt = input("Cerrar sesión ? (S/N): ").strip().lower()
+            if logout_prompt == 's':
+                logout()
         else:
             print("Error:", error.description)
     else:
@@ -81,6 +92,9 @@ def main():
             children, error = dao_child.get_children_by_user_id(user.id, token)
             if children:
                 print("Children:", children)
+                logout_prompt = input("Cerrar sesión ? (S/N): ").strip().lower()
+                if logout_prompt == 's':
+                    logout()
             else:
                 print("Error:", error.description)
         else:
