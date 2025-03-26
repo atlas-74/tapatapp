@@ -1,0 +1,34 @@
+@startuml prova
+left to right direction
+
+actor "Usuario" as user
+actor "Tutor" as tutor
+actor "Cuidador" as caregiver
+
+usecase "Login" as UC1
+usecase "Add Child" as UC2
+usecase "Consulta Child" as UC3
+usecase "Add Taps Child" as UC4
+usecase "Consulta Taps Child" as UC5
+usecase "Consulta User" as UC6
+usecase "Calcul Temps Pegat" as UC7
+usecase "Consulta Child" as UC8
+
+user --> UC1
+
+tutor --> user
+tutor --> UC2
+tutor --> UC3
+tutor --> UC4
+tutor --> UC5
+
+caregiver --> user
+caregiver --> UC2
+caregiver --> UC3
+caregiver --> UC4
+caregiver --> UC5
+
+UC3 <-- UC6 : <<include>>
+UC4 <-- UC7 : <<extends>>
+UC5 <-- UC8 : <<include>>
+@enduml

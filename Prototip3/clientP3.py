@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+import secrets  # Importamos la biblioteca para generar el token aleatorio
 
 class User:
     def __init__(self, id, username, email, password):
@@ -34,6 +35,7 @@ class DAOUser:
             response = requests.post("http://localhost:5000/prototip3/login", json={"username": username, "password": password})
             if response.status_code == 200:
                 data = response.json()
+                # Generar un token aleatorio de 256 caracteres
                 token = data['token']
                 user_data = data['user']
                 with open('Prototip3/token.txt', 'w') as f:
