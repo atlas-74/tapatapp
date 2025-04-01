@@ -1,3 +1,5 @@
+import secrets
+import hashlib
 import dadesServer as dades
 from dadesServer import User, Child, Tap, Status, Role, Treatment
 from flask import Flask, jsonify, request
@@ -41,13 +43,25 @@ user_dao = UserDAO()
 child_dao = ChildDAO()
 tap_dao = TapDAO()
 
-TOKEN_VALID = "secret123"
+# Dictionary to store tokens for each user
+user_tokens = {}
+
+def generate_token():
+    """Generate a unique token."""
+    random_string = secrets.token_hex(32)  # Generate a 64-character random string
+    return hashlib.sha256(random_string.encode()).hexdigest()
 
 def token_required(f):
     def decorated(*args, **kwargs):
         token = request.headers.get('Authorization')
-        if not token or token.split(" ")[1] != TOKEN_VALID:
+        if not token:
             return jsonify({"error": "Access unauthorized"}), 401
+
+        # Extract the token and validate it
+        token_value = token.split(" ")[1]
+        if token_value not in user_tokens.values():
+            return jsonify({"error": "Access unauthorized"}), 401
+
         return f(*args, **kwargs)
     decorated.__name__ = f.__name__
     return decorated
@@ -59,8 +73,21 @@ def login():
     password = data.get('password')
     user = user_dao.getUserByLogin(username, password)
     if user:
-        return jsonify({"token": TOKEN_VALID, "user": user}), 200
+        # Generate a token for the user and store it
+        token = generate_token()
+        user_tokens[username] = token
+        return jsonify({"token": token, "user": user}), 200
     return jsonify({"error": "Invalid username or password"}), 401
+
+@app.route('/prototip3/logout', methods=['POST'])
+@token_required
+def logout():
+    data = request.json
+    username = data.get('username')
+    if username in user_tokens:
+        del user_tokens[username]  # Remove the user's token
+        return jsonify({"message": f"User {username} logged out successfully"}), 200
+    return jsonify({"error": "User not logged in"}), 400
 
 @app.route('/prototip3/GetChildByUser/<int:user_id>', methods=['GET'])
 @token_required
