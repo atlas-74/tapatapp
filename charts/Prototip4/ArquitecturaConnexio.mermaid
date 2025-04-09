@@ -1,0 +1,23 @@
+---
+title: Arquitectura de Conexión - Prototipo 4
+---
+
+graph TD
+    subgraph Cliente
+        A[Usuario] -->|Credenciales| B[Login]
+        B -->|Token JWT| C[Cliente Frontend]
+    end
+
+    subgraph Servidor
+        C -->|Petición HTTP| D[API REST]
+        D -->|Validación Token| E[Middleware de Autenticación]
+        E -->|Consulta| F[Controlador]
+        F -->|Operación CRUD| G[Servicio]
+        G -->|Acceso a Datos| H[DaoUser]
+        G -->|Acceso a Datos| I[DaoChild]
+    end
+
+    subgraph BaseDeDatos
+        H -->|Query SQL| J[(Tabla User)]
+        I -->|Query SQL| K[(Tabla Child)]
+    end
