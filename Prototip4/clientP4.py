@@ -1,126 +1,98 @@
 import requests
+import hashlib
 
 class User:
-    def __init__(self, id, username, email, password):
+    def __init__(self, id, username, email):
         self.id = id
         self.username = username
         self.email = email
-        self.password = password
 
     def __str__(self):
         return f"Id: {self.id}, Username: {self.username}, Email: {self.email}"
 
+
 class Child:
-    def __init__(self, id, name):
+    def __init__(self, id, name, sleep_average, treatment_id, time):
         self.id = id
         self.name = name
+        self.sleep_average = sleep_average
+        self.treatment_id = treatment_id
+        self.time = time
 
     def __str__(self):
-        return f"Id: {self.id}, Name: {self.name}"
+        return f"Id: {self.id}, Name: {self.name}, Sleep Average: {self.sleep_average}, Treatment ID: {self.treatment_id}, Time: {self.time}"
 
-class Tap:
-    def __init__(self, id, child_id, status_id, user_id, init, end):
-        self.id = id
-        self.child_id = child_id
-        self.status_id = status_id
-        self.user_id = user_id
-        self.init = init
-        self.end = end
-
-    def __str__(self):
-        return f"Id: {self.id}, Child Id: {self.child_id}, Status Id: {self.status_id}, Init: {self.init}, End: {self.end}"
-
-class Error:
-    def __init__(self, code, description):
-        self.code = code
-        self.description = description
-
-    def __str__(self):
-        return f"Error {self.code}: {self.description}"
 
 class DAOUser:
+    def hash_password(self, password):
+        """
+        Convierte una contraseña en su equivalente MD5.
+        """
+        md5_hash = hashlib.md5(password.encode())
+        return md5_hash.hexdigest()
+
     def login(self, username, password):
+        """
+        Realiza el login del usuario enviando la contraseña encriptada en MD5.
+        """
         try:
-            response = requests.post("http://localhost:5000/prototip2/login", json={"username": username, "password": password})
+            hashed_password = self.hash_password(password)
+            response = requests.post("http://localhost:5000/prototip2/login", json={"username": username, "password": hashed_password})
             if response.status_code == 200:
-                user_data = response.json()
-                return User(id=user_data['id'], username=user_data['username'], email=user_data['email'], password="")
+                user_data = response.json()["user"]
+                return User(id=user_data['id'], username=user_data['username'], email=user_data['email'])
             else:
-                return Error(code=response.status_code, description=response.json().get("error", "Unknown error"))
-        except requests.exceptions.RequestException as e:
-            return Error(code=503, description=f"Error connecting to the server: {e}")
+                return {"status": "error", "message": response.json().get("message", "Error desconocido")}
+        except requests.RequestException as e:
+            return {"status": "error", "message": str(e)}
+
 
 class DAOChild:
     def get_children_by_user_id(self, user_id):
+        """
+        Obtiene los niños asociados a un usuario por su ID.
+        """
         try:
             response = requests.get(f"http://localhost:5000/prototip2/GetChildByUser/{user_id}")
             if response.status_code == 200:
-                children_data = response.json()
-                return [Child(id=child['id'], name=child['child_name']) for child in children_data]
+                children_data = response.json()["children"]
+                children = [
+                    Child(
+                        id=child["id"],
+                        name=child["child_name"],
+                        sleep_average=child["sleep_average"],
+                        treatment_id=child["treatment_id"],
+                        time=child["time"]
+                    )
+                    for child in children_data
+                ]
+                return children
             else:
-                return Error(code=response.status_code, description="Error fetching children")
-        except requests.exceptions.RequestException as e:
-            return Error(code=503, description=f"Error connecting to the server: {e}")
+                return {"status": "error", "message": response.json().get("message", "Error desconocido")}
+        except requests.RequestException as e:
+            return {"status": "error", "message": str(e)}
 
-class DAOTap:
-    def get_taps_by_child_id(self, child_id):
-        try:
-            response = requests.get(f"http://localhost:5000/prototip2/GetTapByChildId/{child_id}")
-            if response.status_code == 200:
-                taps_data = response.json()
-                return [Tap(id=tap['id'], child_id=tap['child_id'], status_id=tap['status_id'], user_id=tap['user_id'], init=tap['init'], end=tap['end']) for tap in taps_data]
-            else:
-                return Error(code=response.status_code, description="Error fetching taps")
-        except requests.exceptions.RequestException as e:
-            return Error(code=503, description=f"Error connecting to the server: {e}")
 
-class Vista:
-    def __init__(self):
-        self.daoUser = DAOUser()
-        self.daoChild = DAOChild()
-        self.daoTap = DAOTap()
-
-    def get_login_credentials(self):
-        username = input("Enter username: ")
-        password = input("Enter password: ")
-        return username, password
-
-    def show_info_user(self, user):
-        print(f"User Info: {user}")
-
-    def show_info_error(self, error):
-        print(f"Error Info: {error}")
-
-    def show_info_children(self, children):
-        for child in children:
-            print(f"Child Info: {child}")
-
-    def show_info_taps(self, taps):
-        for tap in taps:
-            print(f"Tap Info: {tap}")
-
-def main():
-    vista = Vista()
-
-    username, password = vista.get_login_credentials()
-    result = vista.daoUser.login(username, password)
-
-    if isinstance(result, User):
-        vista.show_info_user(result)
-        user_id = result.id
-        children_result = vista.daoChild.get_children_by_user_id(user_id)
-        if isinstance(children_result, list):
-            vista.show_info_children(children_result)
-            for child in children_result:
-                taps_result = vista.daoTap.get_taps_by_child_id(child.id)
-                if isinstance(taps_result, list):
-                    vista.show_info_taps(taps_result)
-                else:
-                    vista.show_info_error(taps_result)
-        else:
-            vista.show_info_error(children_result)
-    else:
-        vista.show_info_error(result)
-
+# Ejemplo de uso
 if __name__ == "__main__":
-    main()
+    dao_user = DAOUser()
+    dao_child = DAOChild()
+
+    # Login del usuario
+    username = input("Introduce el nombre de usuario: ")
+    password = input("Introduce la contraseña: ")
+    login_result = dao_user.login(username, password)
+
+    if isinstance(login_result, User):
+        print(f"Login exitoso: {login_result}")
+
+        # Obtener los niños asociados al usuario
+        children_result = dao_child.get_children_by_user_id(login_result.id)
+        if isinstance(children_result, list):
+            print("Niños asociados al usuario:")
+            for child in children_result:
+                print(child)
+        else:
+            print(f"Error al obtener los niños: {children_result['message']}")
+    else:
+        print(f"Error en el login: {login_result['message']}")
